@@ -226,6 +226,7 @@
               Form submitted successfully!
               <span id="closeButton" onclick="closeSuccessMessage()">✖</span>
             </div>
+            <div id="loader"></div>
         </form>
 
     </main>
@@ -265,7 +266,7 @@
                 // Collect form data
                 const formData = new FormData(form);
                 // Display loader
-                loader.style.display = 'block';
+                loader.style.display = 'none';
                 // Make an AJAX request to the Google Apps Script
                 fetch(scriptUrl, {
                     method: 'POST',
