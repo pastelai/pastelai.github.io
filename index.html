@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            overflow: auto;
+        }
+
+        header {
+            height: 40vh;
+            background: url('img/header.jpeg') center/cover no-repeat;
+            display: flex;
+        }
+
+        header img {
+            max-width: 100px;
+            max-height: 100px;
+            margin-top: 3vh;
+            margin-left: 30vh;
+        }
+
+        header h1 {
+            color: #424242;
+            font-size: 69px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 105%;
+            letter-spacing: -2px;
+            margin-left: 30vh;
+            max-width: 51%;
+            word-wrap: break-word;
+        }
+
+        main {
+            background: #fff;
+        }
+
+        form {
+            max-width: 800px;
+            margin: 10px auto;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form h2 {
+          text-align: center;
+          color: #757575;
+          font-size: 40px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 105%;
+          letter-spacing: -2px;
+        }
+
+        label {
+            display: inline-block;
+            margin-bottom: 8px;
+            color: #333;
+            text-align: left;
+            font-family: monospace;
+        }
+
+        input {
+            width: calc(100% - 16px);
+            display: block;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            width: 30%;
+            margin: 0 auto;
+            background: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background: #0056b3;
+        }
+
+        .footer {
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            bottom: 0;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .footer img {
+            max-width: 100px;
+            max-height: 100px;
+        }
+
+        .footer p {
+          color: #6c6c6c;
+          font-size: 16px;
+          font-weight: 400;
+          letter-spacing: 0;
+        }
+
+        .flippingText {
+            animation: flip-vertical 2s infinite alternate-reverse;
+            white-space: pre;
+        }
+
+        @keyframes flip-vertical {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-100%);
+            }
+        }
+
+        #successMessage {
+            display: none;
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            padding: 0.75rem 1.25rem;
+            margin-top: 20px;
+            border: 1px solid transparent;
+            border-radius: 0.25rem;
+        }
+
+        #closeButton {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            cursor: pointer;
+            color: #222222;
+        }
+
+        #loader {
+            display: none;
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #3498db;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @media screen  and (max-width:1500px) and (min-width: 801px) {
+            header {
+                height: 40vh;
+            }
+            header img {
+              margin-left: 20vh;
+            }
+
+            header h1 {
+                font-size: 50px;
+                margin-left: 20vh;
+            }
+        }
+
+        @media screen and (max-width: 800px) {
+            header {
+                height: auto;
+            }
+            header img {
+                max-width: 80px;
+                max-height: 80px;
+                margin-top: 3vh;
+                margin-left: 5vh;
+            }
+            header h1 {
+                font-size: 30px;
+                margin-left: 5vh;
+                max-width: 80%;
+            }
+
+            form {
+                max-width: 90%;
+            }
+        }
+
+    </style>
+    <title>Pastel AI</title>
+</head>
+
+<body>
+
+    <header>
+        <div>
+          <img src="img/pastelai_logo.png" alt="pastel logo">
+          <h1 class="desc">Multiply the productive capacity of your <span class="flippingText" id="flippingText" style="color: rgb(139, 92, 246)"></span> teams with human centric AI.</h1>
+        </div>
+    </header>
+
+    <main>
+        <form id="contactForm">
+            <h2>Register your interest</h2>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="organization">Organization</label>
+            <input type="text" id="organization" name="organization">
+
+            <label for="role">Role</label>
+            <input type="text" id="role" name="role">
+
+            <input type="submit" value="Submit">
+            <div id="successMessage">
+              Form submitted successfully!
+              <span id="closeButton" onclick="closeSuccessMessage()">✖</span>
+            </div>
+        </form>
+
+    </main>
+
+    <div class="footer">
+        <img src="img/pastelai_logo.png" alt="Pastel AI">
+        <p>All rights reserved Pastel ai | Copyright&copy; 2024</p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const textArray = ["underwriting", "finance", "sales", "HR", "technology"];
+            const flippingText = document.getElementById("flippingText");
+            let index = 0;
+
+            function flipText() {
+                flippingText.textContent = textArray[index];
+                index = (index + 1) % textArray.length;
+            }
+
+            flipText(); // Initial text
+
+            setInterval(flipText, 2000); // Flip every 2 seconds
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("contactForm");
+            const successMessage = document.getElementById("successMessage");
+            const loader = document.getElementById("loader");
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                // Assuming your Google Apps Script URL
+                const scriptUrl = "https://script.google.com/macros/s/AKfycbxYw2YYv8rw9JFJPkWOWpQ4eI5OBmNm8iItIAsdBE3O5Lxb4n8l5UI9TQNnhzzEZYsmSQ/exec";
+
+                // Collect form data
+                const formData = new FormData(form);
+                // Display loader
+                loader.style.display = 'block';
+                // Make an AJAX request to the Google Apps Script
+                fetch(scriptUrl, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Hide loader
+                    loader.style.display = 'none';
+                    if (data.result === 'success') {
+                        // Display success message
+                        successMessage.style.display = 'block';
+                    } else {
+                        console.log(data);
+                        // Handle failure or show error message
+                        console.error('Form submission failed.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+        });
+
+        function closeSuccessMessage() {
+            const successMessage = document.getElementById("successMessage");
+            successMessage.style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
