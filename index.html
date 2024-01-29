@@ -27,7 +27,7 @@
 
         header h1 {
             color: #424242;
-            font-size: 69px;
+            font-size: 60px;
             font-style: normal;
             font-weight: 600;
             line-height: 105%;
@@ -53,11 +53,11 @@
         form h2 {
           text-align: center;
           color: #757575;
-          font-size: 40px;
+          font-size: 25px;
           font-style: normal;
           font-weight: 600;
           line-height: 105%;
-          letter-spacing: -2px;
+          letter-spacing: -1px;
         }
 
         label {
@@ -110,9 +110,37 @@
           letter-spacing: 0;
         }
 
-        .flippingText {
-            animation: flip-vertical 2s infinite alternate-reverse;
-            white-space: pre;
+        .word {
+            color: rgb(139, 92, 246);
+            position: fixed;
+            display: inline-block;
+            animation: word 10s infinite ease-in-out;
+        }
+         .word:nth-child(1) {
+             animation-delay: -10s;
+        }
+         .word:nth-child(2) {
+             animation-delay: -8s;
+        }
+         .word:nth-child(3) {
+             animation-delay: -6s;
+        }
+         .word:nth-child(4) {
+             animation-delay: -4s;
+        }
+         .word:nth-child(5) {
+             animation-delay: -2s;
+        }
+
+        @keyframes word {
+            0%, 5%, 100% {
+                filter: blur(0px);
+                opacity: 1;
+            }
+            20%, 80% {
+                filter: blur(1em);
+                opacity: 0;
+            }
         }
 
         @keyframes flip-vertical {
@@ -167,7 +195,7 @@
             }
 
             header h1 {
-                font-size: 50px;
+                font-size: 40px;
                 margin-left: 20vh;
             }
         }
@@ -180,12 +208,12 @@
                 max-width: 80px;
                 max-height: 80px;
                 margin-top: 3vh;
-                margin-left: 5vh;
+                margin-left: 3vh;
             }
             header h1 {
-                font-size: 30px;
-                margin-left: 5vh;
-                max-width: 91%;
+                font-size: 25px;
+                margin-left: 3vh;
+                max-width: 100%;
             }
 
             form {
@@ -202,8 +230,16 @@
     <header>
         <div>
           <img src="img/pastelai_logo.png" alt="pastel logo">
-          <h1 class="desc">Multiply the productive<br/> capacity of your <br/><span class="flippingText" id="flippingText" style="color: rgb(139, 92, 246)"></span>
-          teams with<br/> human centric AI.</h1>
+          <h1 class="desc">Multiply the productive<br/>
+              capacity of your&nbsp;
+                  <div class="word">underwriting</div>
+                  <div class="word">HR</div>
+                  <div class="word">sales</div>
+                  <div class="word">technology</div>
+                  <div class="word">finance</div>
+              <br/>
+              teams with <br/>
+              human centric AI.</h1>
         </div>
     </header>
 
@@ -238,21 +274,6 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const textArray = ["underwriting", "finance", "sales", "HR", "technology"];
-            const flippingText = document.getElementById("flippingText");
-            let index = 0;
-
-            function flipText() {
-                flippingText.textContent = textArray[index];
-                index = (index + 1) % textArray.length;
-            }
-
-            flipText(); // Initial text
-
-            setInterval(flipText, 2000); // Flip every 2 seconds
-        });
-
         document.addEventListener("DOMContentLoaded", function () {
             const form = document.getElementById("contactForm");
             const successMessage = document.getElementById("successMessage");
