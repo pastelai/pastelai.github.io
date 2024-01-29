@@ -112,7 +112,7 @@
 
         .word {
             color: rgb(139, 92, 246);
-            position: fixed;
+            position: absolute;
             display: inline-block;
             animation: word 10s infinite ease-in-out;
         }
@@ -157,7 +157,6 @@
             display: none;
             color: #155724;
             background-color: #d4edda;
-            border-color: #c3e6cb;
             padding: 0.75rem 1.25rem;
             margin-top: 20px;
             border: 1px solid transparent;
@@ -287,7 +286,13 @@
         <p>All rights reserved Pastel ai | Copyright&copy; 2024</p>
     </div>
 
-    <script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+        $(window).on('scroll', function () {
+            var $w = $(window);
+            $('.word').css('top', $w.scrollTop());
+
+        });
+
         document.addEventListener("DOMContentLoaded", function () {
             const form = document.getElementById("contactForm");
             const successMessage = document.getElementById("successMessage");
